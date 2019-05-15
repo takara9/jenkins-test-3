@@ -9,7 +9,7 @@ podTemplate(
     emptyDirVolume(memory: false, mountPath: '/var/lib/docker')
   ],
   envVars: [
-    podEnvVar(key: 'DOCKER_HOST', value: 'tcp://localhost:2375')
+    podEnvVar(key: 'DOCKER_HOST', value: 'tcp://127.0.0.1:2375')
   ] 
 ) 
 {
