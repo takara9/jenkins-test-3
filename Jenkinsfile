@@ -6,8 +6,7 @@ podTemplate(
     containerTemplate(name: 'skaffold-insider', image: 'hhayakaw/skaffold-insider:v1.0.0', ttyEnabled: true, command: 'cat')
   ],
   volumes: [
-    emptyDirVolume(memory: false, mountPath: '/var/lib/docker'),
-    hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')    
+    emptyDirVolume(memory: false, mountPath: '/var/lib/docker')
   ],
   envVars: [
     podEnvVar(key: 'DOCKER_HOST', value: 'tcp://127.0.0.1:2375')
@@ -21,14 +20,14 @@ podTemplate(
       stage('Run a docker thing') {
         container('dockerd') {
             stage 'Docker thing1'
-            sh 'docker pull redis'
+            sh 'docker pull alpine'
         }
       }
       stage('Test skaffold') {
         git 'https://github.com/takara9/cowweb.git'
         container('dockerd') {
           sh """
-            docker login --username=$DOCKER_ID_USR --password=$DOCKER_ID_PSW
+            docker login --username=$DOCKER_ID_USR --password=$DOCKER_ID_PSW $DOCKER_HOST
             skaffold run -p release
           """
 	  }
