@@ -26,7 +26,7 @@ podTemplate(
       }
       stage('Test skaffold') {
         git 'https://github.com/takara9/cowweb.git'
-        container('skaffold-insider') {
+        container('dockerd') {
           sh """
             docker login --username=$DOCKER_ID_USR --password=$DOCKER_ID_PSW
             skaffold run -p release
