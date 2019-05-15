@@ -6,7 +6,8 @@ podTemplate(
     containerTemplate(name: 'skaffold-insider', image: 'hhayakaw/skaffold-insider:v1.0.0', ttyEnabled: true, command: 'cat')
   ],
   volumes: [
-    emptyDirVolume(memory: false, mountPath: '/var/lib/docker')
+    emptyDirVolume(memory: false, mountPath: '/var/lib/docker'),
+    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock') 
   ],
   envVars: [
     podEnvVar(key: 'DOCKER_HOST', value: '127.0.0.1:2375')
@@ -27,7 +28,7 @@ podTemplate(
         git 'https://github.com/takara9/cowweb.git'
         container('skaffold-insider') {
           sh """
-            docker login --username=$DOCKER_ID_USR --password=$DOCKER_ID_PSW $DOCKER_HOST
+            docker login --username=$DOCKER_ID_USR --password=$DOCKER_ID_PSW
             skaffold run -p release
           """
 	  }
