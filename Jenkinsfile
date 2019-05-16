@@ -2,7 +2,8 @@ podTemplate(
   label: 'mypod',
   containers: [
     containerTemplate(name: 'dockerd', image: 'docker:dind', ttyEnabled: true, alwaysPullImage: true, privileged: true,
-      command: 'dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay')
+      command: 'dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay'),
+    containerTemplate(name: 'kubectl', image: 'bitnami/kubectl:latest', command: 'cat', ttyEnabled: true)
   ],
   volumes: [
     emptyDirVolume(memory: false, mountPath: '/var/lib/docker')
@@ -32,6 +33,13 @@ podTemplate(
             sh 'docker images'
         }
       }
+      stage('deploy') {
+        container('kubectl') {
+            stage 'version'
+            sh 'kubectl --version'
+        }
+      }
+      
     }
   }
 }
