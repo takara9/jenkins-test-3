@@ -21,6 +21,8 @@ podTemplate(
       }
       stage('confirm') {
         container('dockerd') {
+            stage 'git'
+            sh 'git -h'
             stage 'view'
             sh 'docker images'
             stage 'view2'
