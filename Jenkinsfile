@@ -16,21 +16,16 @@ podTemplate(
       stage('pull') {
         container('dockerd') {
             git url: 'https://github.com/takara9/node-express-login'	
-            stage 'pull'
-            sh 'docker pull alpine'
-	    stage 'view'
-	    sh 'ls -lR'
+            stage 'build'
+            sh 'docker build -t maho/node-express-login'
+	    stage 'push'
+	    sh 'docker push maho/node-express-login'
         }
       }
       stage('confirm') {
         container('dockerd') {
-            stage 'git'
-            sh 'git -h'
             stage 'view'
             sh 'docker images'
-            stage 'view2'
-            sh 'docker ps'
-
         }
       }
     }
