@@ -16,6 +16,8 @@ podTemplate(
       stage('pull') {
         container('dockerd') {
             git url: 'https://github.com/takara9/node-express-login'
+	    stage 'setup'
+	    sh 'docker login --username=$DOCKER_ID_USR --password=$DOCKER_ID_PSW'
 	    stage 'confirm'
 	    sh 'ls -al'
             stage 'build'
