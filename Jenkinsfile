@@ -5,7 +5,7 @@ podTemplate(
       command: 'dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay')
   ],
   volumes: [
-    emptyDirVolume(memory: false, mountPath: '/var/lib/docker'),
+    emptyDirVolume(memory: false, mountPath: '/var/lib/docker')
   ]
 ) 
 {
