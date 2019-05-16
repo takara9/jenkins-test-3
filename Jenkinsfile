@@ -25,6 +25,6 @@ podTemplate(
             sh 'docker images'
         }
       }
-
-   }
+    }
+  }
 }
