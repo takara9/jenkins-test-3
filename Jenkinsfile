@@ -23,6 +23,9 @@ podTemplate(
         container('dockerd') {
             stage 'view'
             sh 'docker images'
+            stage 'view2'
+            sh 'docker ps'
+
         }
       }
     }
