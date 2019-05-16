@@ -19,7 +19,7 @@ podTemplate(
 	    stage 'confirm'
 	    sh 'ls -al'
             stage 'build'
-            sh 'docker build -t maho/node-express-login:0.1 node-express-login'
+            sh 'docker build -t maho/node-express-login:0.1 .'
 	    stage 'push'
 	    sh 'docker push maho/node-express-login:0.1'
         }
