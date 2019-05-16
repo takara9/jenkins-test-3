@@ -16,6 +16,8 @@ podTemplate(
       stage('pull') {
         container('dockerd') {
             git url: 'https://github.com/takara9/node-express-login'
+	    stage 'confirm'
+	    sh 'ls -al'
             stage 'build'
             sh 'docker build -t maho/node-express-login:0.1 node-express-login'
 	    stage 'push'
