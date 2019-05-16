@@ -15,8 +15,11 @@ podTemplate(
     ]) {
       stage('pull') {
         container('dockerd') {
+            git url: 'https://github.com/takara9/node-express-login'	
             stage 'pull'
             sh 'docker pull alpine'
+	    stage 'view'
+	    sh 'ls -lR'
         }
       }
       stage('confirm') {
