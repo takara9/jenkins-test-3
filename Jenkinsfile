@@ -35,13 +35,15 @@ podTemplate(
         }
       }
       stage('deploy') {
-        container('kubectl') {
-            stage 'version'
-            sh 'kubectl version'
-            stage 'get env'
-            sh 'kubectl get node'
-
-        }
+          container('kubectl') {
+              stage('version') {
+	          steps {
+		      sh 'ls -al'
+		      sh 'echo "test" > test.txt'
+                      sh 'kubectl version'
+                  }
+              }
+          }
       }
     }
   }
