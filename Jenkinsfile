@@ -22,6 +22,7 @@ podTemplate(
 	    stage 'setup'
 	    sh 'docker login --username=$DOCKER_ID_USR --password=$DOCKER_ID_PSW'
 	    stage 'confirm'
+	    sh 'env'
 	    sh 'ls -al'
             stage 'build'
             sh 'docker build -t maho/node-express-login:0.1 .'
