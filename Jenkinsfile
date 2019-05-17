@@ -43,7 +43,8 @@ podTemplate(
 	    sh 'KUBECONFIG=/kubeconfig/kube-config-tok05-jk1.yml kubectl get node'
 	    stage 'run-pod'
 	    sh 'KUBECONFIG=/kubeconfig/kube-config-tok05-jk1.yml kubectl run -it test-on-jenkins --image=ubuntu:latest --restart=Never -- hostname'
-
+	    stage 'stage-status'
+            sh 'ls -al'
           }
       }
     }
