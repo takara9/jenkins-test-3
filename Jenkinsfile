@@ -38,8 +38,6 @@ podTemplate(
           container('kubectl') {
               stage 'version'
 	      sh 'ls -al'
-	      sh 'echo "test" > test.txt'
-              sh 'kubectl version'
           }
       }
     }
