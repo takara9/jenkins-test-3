@@ -4,8 +4,7 @@ podTemplate(
   containers: [
     containerTemplate(name: 'dockerd', image: 'docker:dind', ttyEnabled: true, alwaysPullImage: true, privileged: true,
       command: 'dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay'),
-    containerTemplate(name: 'kubectl', image: 'bitnami/kubectl:latest', ttyEnabled: true, alwaysPullImage: true, privileged: true,
-      command: 'cat' )
+    containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:latest', ttyEnabled: true, alwaysPullImage: true, privileged: true, command: 'cat' )
   ],
   volumes: [
     emptyDirVolume(memory: false, mountPath: '/var/lib/docker')
