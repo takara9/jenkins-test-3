@@ -25,9 +25,9 @@ podTemplate(
 	    sh 'env'
 	    sh 'ls -al'
             stage 'build'
-            sh 'docker build -t maho/node-express-login:0.1 .'
+            sh 'docker build -t maho/node-express-login:$BUILD_NUMBER .'
 	    stage 'push'
-	    sh 'docker push maho/node-express-login:0.1'
+	    sh 'docker push maho/node-express-login:$BUILD_NUMBER'
         }
       }
       stage('confirm') {
@@ -44,10 +44,13 @@ podTemplate(
 	    sh 'KUBECONFIG=/kubeconfig/kube-config-tok05-jk1.yml kubectl get node'
 	    stage 'stage-status'
             sh 'ls -al'
+	    stage 'setup yaml'
+	    sh 'cat k8s-deployment.yaml.tmpl |sed s/'XXXXX'/$BUILD_NUMBER/ > k8s-deployment-j.yaml'
             stage 'deploy'
-	    sh 'KUBECONFIG=/kubeconfig/kube-config-tok05-jk1.yml kubectl apply -f k8s-deployment.yaml'
+	    sh 'KUBECONFIG=/kubeconfig/kube-config-tok05-jk1.yml kubectl apply -f k8s-deployment-j.yaml'
           }
       }
     }
   }
 }
+
