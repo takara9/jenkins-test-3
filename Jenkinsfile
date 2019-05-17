@@ -41,7 +41,7 @@ podTemplate(
             stage 'get-cluster'
 	    sh 'kubectl get node'
 	    stage 'run-pod'
-	    sh 'kubectl run -it test-on-jenkins --image=ubuntu:latest --restart=Never --rm -- hostname'
+	    sh 'kubectl run -it test-on-jenkins --image=ubuntu:latest --restart=Never -- hostname'
 
           }
       }
