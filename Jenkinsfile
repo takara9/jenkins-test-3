@@ -18,7 +18,7 @@ spec:
       volumeMounts:
       - mountPath: /var/lib/docker
         name: docker-containe-vol
-      command: ['/usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay']
+      command: [ 'dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay' ]
     - name: kubectl
       image: bitnami/kubectl:latest
       tty: true
@@ -28,7 +28,7 @@ spec:
       volumeMounts:
       - mountPath: /var/lib/docker
         name: docker-containe-vol
-      command: ['cat']
+      command: [ 'cat' ]
   volumes:
   - name: docker-containe-vol
     emptyDir: {}
