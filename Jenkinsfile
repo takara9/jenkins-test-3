@@ -37,7 +37,7 @@ podTemplate(
       stage('deploy') {
           container('kubectl') {
             stage 'version'
-	    sh 'version'
+	    sh 'kubectl version'
           }
       }
     }
