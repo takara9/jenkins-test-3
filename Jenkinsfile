@@ -34,7 +34,6 @@ spec:
     emptyDir: {}
 
 """
-timestamps { 
   podTemplate(label: label, yaml: yaml) {
     node (label) {
       withCredentials([
@@ -68,7 +67,7 @@ timestamps {
       }
     }
   }
-}
+
 
 
 
