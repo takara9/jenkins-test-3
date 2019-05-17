@@ -5,7 +5,8 @@ def yaml = """
 apiVersion: v1
 kind: Pod
 metadata:
-  name: label
+  labels:
+    label: label
 spec:
   containers:
     - name: dockerd
@@ -18,7 +19,7 @@ spec:
       volumeMounts:
       - mountPath: /var/lib/docker
         name: docker-containe-vol
-      command: [ 'cat' ]
+      command: [ 'dockerd' ]
     - name: kubectl
       image: bitnami/kubectl:latest
       tty: true
