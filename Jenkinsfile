@@ -7,7 +7,8 @@ podTemplate(
     containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:latest', ttyEnabled: true, alwaysPullImage: true, privileged: true, command: 'cat' )
   ],
   volumes: [
-    emptyDirVolume(memory: false, mountPath: '/var/lib/docker')
+    emptyDirVolume(memory: false, mountPath: '/var/lib/docker'),
+    configMapVolume(mountPath: '/kubeconfig', configMapName: 'kubeconfig')
   ]
 ) 
 {
@@ -39,9 +40,9 @@ podTemplate(
             stage 'version'
 	    sh 'kubectl version'
             stage 'get-cluster'
-	    sh 'kubectl get node'
+	    sh 'KUBECONFIG=/kubeconfig kubectl get node'
 	    stage 'run-pod'
-	    sh 'kubectl run -it test-on-jenkins --image=ubuntu:latest --restart=Never -- hostname'
+	    sh 'KUBECONFIG=/kubeconfig kubectl run -it test-on-jenkins --image=ubuntu:latest --restart=Never -- hostname'
 
           }
       }
