@@ -41,10 +41,10 @@ podTemplate(
 	    sh 'kubectl version'
             stage 'get-cluster'
 	    sh 'KUBECONFIG=/kubeconfig/kube-config-tok05-jk1.yml kubectl get node'
-	    stage 'run-pod'
-	    sh 'KUBECONFIG=/kubeconfig/kube-config-tok05-jk1.yml kubectl run -it test-on-jenkins --image=ubuntu:latest --restart=Never --rm -- hostname'
 	    stage 'stage-status'
             sh 'ls -al'
+            stage 'deploy'
+	    sh 'KUBECONFIG=/kubeconfig/kube-config-tok05-jk1.yml kubectl apply -f k8s-deployment.yaml'
           }
       }
     }
